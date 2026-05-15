@@ -21,6 +21,128 @@ html{scroll-behavior:smooth;font-size:16px}
 body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;overflow-x:hidden }
 a{text-decoration:none;color:inherit}
 
+/* ===== AGE GATE ===== */
+#age-gate{
+  position:fixed;
+  inset:0;
+  z-index:99999;
+  background:rgba(5,5,5,0.96);
+  backdrop-filter:blur(18px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+.age-gate-box{
+  background:var(--card);
+  border:1px solid rgba(201,146,42,0.5);
+  border-radius:8px;
+  padding:2.8rem 2.4rem 2.4rem;
+  max-width:420px;
+  width:100%;
+  text-align:center;
+  box-shadow:0 0 60px rgba(201,146,42,0.12), 0 20px 60px rgba(0,0,0,0.8);
+  animation:ageBoxIn .5s cubic-bezier(.22,1,.36,1) both;
+}
+@keyframes ageBoxIn{
+  from{opacity:0;transform:translateY(30px) scale(.97)}
+  to{opacity:1;transform:none}
+}
+.age-gate-logo{
+  font-family:'Playfair Display',serif;
+  font-size:1.4rem;
+  font-weight:900;
+  color:var(--gold-light);
+  letter-spacing:.05em;
+  margin-bottom:1.6rem;
+}
+.age-gate-icon{
+  width:60px;
+  height:60px;
+  background:rgba(201,146,42,0.1);
+  border:1px solid rgba(201,146,42,0.3);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0 auto 1.4rem;
+}
+.age-gate-box h2{
+  font-family:'Playfair Display',serif;
+  font-size:1.6rem;
+  font-weight:700;
+  color:var(--white);
+  margin-bottom:.8rem;
+  line-height:1.25;
+}
+.age-gate-box h2 span{
+  color:var(--gold-light);
+}
+.age-gate-box p{
+  font-size:.88rem;
+  color:var(--muted);
+  line-height:1.65;
+  margin-bottom:2rem;
+}
+.age-gate-btns{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:.9rem;
+}
+.btn-age-yes{
+  background:var(--gold);
+  color:var(--black);
+  font-weight:700;
+  font-size:.9rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  padding:.85rem 1rem;
+  border-radius:4px;
+  border:2px solid var(--gold);
+  cursor:pointer;
+  font-family:'Inter',sans-serif;
+  transition:background .2s, transform .15s;
+}
+.btn-age-yes:hover{background:var(--gold-light);border-color:var(--gold-light);transform:translateY(-2px)}
+.btn-age-no{
+  background:transparent;
+  color:var(--muted);
+  font-weight:600;
+  font-size:.9rem;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  padding:.85rem 1rem;
+  border-radius:4px;
+  border:2px solid var(--border);
+  cursor:pointer;
+  font-family:'Inter',sans-serif;
+  transition:border-color .2s, color .2s, transform .15s;
+}
+.btn-age-no:hover{border-color:#555;color:var(--white);transform:translateY(-2px)}
+.age-gate-note{
+  margin-top:1.2rem;
+  font-size:.75rem;
+  color:#555;
+  line-height:1.5;
+}
+/* Declined screen */
+#age-declined{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:100000;
+  background:var(--black);
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:20px;
+  flex-direction:column;
+  gap:1rem;
+}
+#age-declined.show{display:flex}
+#age-declined h2{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--white)}
+#age-declined p{color:var(--muted);font-size:.95rem;max-width:360px}
+
 /* NAV */
 nav{
   position:fixed;
@@ -28,7 +150,7 @@ nav{
   width:100%;
   box-sizing:border-box;
   z-index:999;
-  padding:0 54px; /* pehle 5% tha */
+  padding:0 54px;
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -53,7 +175,7 @@ nav{
 }
 
 .logo-img{
-  height:54px; /* pehle 62 tha */
+  height:54px;
   width:auto;
   object-fit:contain;
   display:block;
@@ -140,58 +262,13 @@ section{padding:90px 5%}
 .service-card p{font-size:.88rem;color:var(--muted);line-height:1.7}
 
 /* GALLERY */
-/* GALLERY */
-#gallery{
-  background:var(--dark)
-}
-
-.gallery-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:1.5rem;
-  margin-top:3rem
-}
-
-.gallery-item{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:6px;
-  overflow:hidden;
-  transition:all .3s;
-  cursor:pointer;
-  position:relative;
-  display:flex;
-  flex-direction:column;
-}
-
-.gallery-item:hover{
-  border-color:rgba(201,146,42,0.5);
-  transform:translateY(-4px)
-}
-
-.gallery-item:hover img{
-  transform:scale(1.05)
-}
-
-.gallery-item img{
-  width:100%;
-  height:260px;
-  object-fit:cover;
-  display:block;
-  transition:transform .4s ease;
-}
-
-.gallery-item .item-label{
-  position:static;
-  background:transparent;
-  padding:1rem;
-  text-align:center;
-  font-size:.9rem;
-  font-weight:700;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  color:var(--gold-light);
-}
+#gallery{background:var(--dark)}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;margin-top:3rem}
+.gallery-item{background:var(--card);border:1px solid var(--border);border-radius:6px;overflow:hidden;transition:all .3s;cursor:pointer;position:relative;display:flex;flex-direction:column;}
+.gallery-item:hover{border-color:rgba(201,146,42,0.5);transform:translateY(-4px)}
+.gallery-item:hover img{transform:scale(1.05)}
+.gallery-item img{width:100%;height:260px;object-fit:cover;display:block;transition:transform .4s ease;}
+.gallery-item .item-label{position:static;background:transparent;padding:1rem;text-align:center;font-size:.9rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-light);}
 
 /* WHY CHOOSE US */
 #why{background:var(--black)}
@@ -236,7 +313,6 @@ footer p{font-size:.8rem;color:var(--muted)}
 .wa-float:hover{transform:scale(1.1)}
 .wa-float svg{width:28px;height:28px;fill:white}
 
-
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeDown{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:translateY(0)}}
 .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
@@ -247,29 +323,46 @@ footer p{font-size:.8rem;color:var(--muted)}
   .about-grid .section-title{font-size:2rem}
 }
 @media(max-width:700px){
-  nav{
-    padding:0 18px;
-  }
-
-  .nav-links{
-    display:none;
-  }
-
-  .hamburger{
-    display:flex;
-  }
+  nav{padding:0 18px;}
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
 }
 @media(max-width:480px){
   .gallery-grid{grid-template-columns:repeat(2,1fr)}
+  .age-gate-btns{grid-template-columns:1fr}
 }
 @media(min-width:701px){
-  .nav-logo{
-    margin-left:20px;
-  }
+  .nav-logo{margin-left:20px;}
 }
 </style>
 </head>
 <body>
+
+<!-- ===== AGE VERIFICATION GATE ===== -->
+<div id="age-gate">
+  <div class="age-gate-box">
+    <div class="age-gate-logo">Dial4Bottle</div>
+    <div class="age-gate-icon">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gold-light)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      </svg>
+    </div>
+    <h2>Are you over <span>18</span> years old?</h2>
+    <p>You must be of legal drinking age to buy our products. Age will be verified upon delivery through ID.</p>
+    <div class="age-gate-btns">
+      <button class="btn-age-yes" onclick="ageVerified()">YES, I AM</button>
+      <button class="btn-age-no" onclick="ageDenied()">NO, I AM NOT</button>
+    </div>
+    <p class="age-gate-note">By entering this site you agree to our Terms of Service &amp; Privacy Policy. Must be 18+ to order. Please drink responsibly.</p>
+  </div>
+</div>
+
+<!-- Declined message -->
+<div id="age-declined">
+  <div style="font-family:'Playfair Display',serif;font-size:2rem;color:var(--gold-light);margin-bottom:.5rem">Dial4Bottle</div>
+  <h2>Sorry, come back when you're older.</h2>
+  <p>You must be 18 years or older to access this website. Please drink responsibly.</p>
+</div>
 
 <!-- NAV -->
 <nav id="navbar">
@@ -375,7 +468,6 @@ footer p{font-size:.8rem;color:var(--muted)}
   <div class="services-grid">
     <div class="service-card reveal">
       <div class="service-icon">
-        <!-- Glass / Liquor icon -->
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--gold-light)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 22h8M12 22v-7M5 2l2 7h10l2-7H5zM7 9c0 2.76 2.24 6 5 6s5-3.24 5-6"/></svg>
       </div>
       <h3>Liquor Delivery</h3>
@@ -383,7 +475,6 @@ footer p{font-size:.8rem;color:var(--muted)}
     </div>
     <div class="service-card reveal">
       <div class="service-icon">
-        <!-- Lightning / Fast -->
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--gold-light)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
       </div>
       <h3>Fast Bottle Delivery</h3>
@@ -391,7 +482,6 @@ footer p{font-size:.8rem;color:var(--muted)}
     </div>
     <div class="service-card reveal">
       <div class="service-icon">
-        <!-- Moon / Late Night -->
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--gold-light)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
       </div>
       <h3>Late Night Delivery</h3>
@@ -399,7 +489,6 @@ footer p{font-size:.8rem;color:var(--muted)}
     </div>
     <div class="service-card reveal">
       <div class="service-icon">
-        <!-- Door / Doorstep -->
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--gold-light)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
       </div>
       <h3>Doorstep Delivery</h3>
@@ -430,13 +519,20 @@ footer p{font-size:.8rem;color:var(--muted)}
       <div class="item-label">Wine</div>
     </div>
     <div class="gallery-item reveal">
-     
- <img src="img/beer.jpg" alt="Beer"/>
+      <img src="img/beer.jpg" alt="Beer"/>
       <div class="item-label">Beer</div>
     </div>
     <div class="gallery-item reveal">
       <img src="https://images.unsplash.com/photo-1562601579-599dec564e06?w=400&q=80" alt="Rum"/>
       <div class="item-label">Rum</div>
+    </div>
+    <div class="gallery-item reveal">
+      <img src="https://images.unsplash.com/photo-1642647237318-3e30ff181a3c?q=80"/>
+      <div class="item-label">Budweiser</div>
+    </div>
+    <div class="gallery-item reveal">
+      <img src="https://images.unsplash.com/photo-1651324100969-26f482b9a775?q=80pg" alt="Twisted Tea" onerror="this.src='https://images.unsplash.com/photo-1571613316887-6f8d5cbf7ef7?w=400&q=80'"/>
+      <div class="item-label">Twisted Tea</div>
     </div>
   </div>
 </section>
@@ -496,116 +592,49 @@ footer p{font-size:.8rem;color:var(--muted)}
   </div>
 
   <div class="contact-grid">
-
-    <!-- LEFT -->
     <div class="contact-info reveal">
       <h3>Ready to Order? Let's Talk.</h3>
-
       <div class="contact-item">
         <div class="contact-ico">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold-light)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.82 19.79 19.79 0 01.06 1.18 2 2 0 012.03 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
-          </svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold-light)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.82 19.79 19.79 0 01.06 1.18 2 2 0 012.03 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
         </div>
-        <div class="detail">
-          <strong>Phone</strong>
-          <span><a href="tel:7803015050">780-301-5050</a></span>
-        </div>
+        <div class="detail"><strong>Phone</strong><span><a href="tel:7803015050">780-301-5050</a></span></div>
       </div>
-
       <div class="contact-item">
         <div class="contact-ico">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold-light)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-            <polyline points="22,6 12,13 2,6"/>
-          </svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold-light)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
         </div>
-        <div class="detail">
-          <strong>Email</strong>
-          <span><a href="mailto:yegdial4bottle@gmail.com">yegdial4bottle@gmail.com</a></span>
-        </div>
+        <div class="detail"><strong>Email</strong><span><a href="mailto:yegdial4bottle@gmail.com">yegdial4bottle@gmail.com</a></span></div>
       </div>
-
       <div class="contact-item">
         <div class="contact-ico">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold-light)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
-            <circle cx="12" cy="10" r="3"/>
-          </svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold-light)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
         </div>
-        <div class="detail">
-          <strong>Location</strong>
-          <span>Edmonton, AB, Canada</span>
-        </div>
+        <div class="detail"><strong>Location</strong><span>Edmonton, AB, Canada</span></div>
       </div>
-
       <div class="contact-item">
         <div class="contact-ico">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold-light)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/>
-            <polyline points="12 6 12 12 16 14"/>
-          </svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold-light)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         </div>
-        <div class="detail">
-          <strong>Hours</strong>
-          <span>Open Late — 7 Days a Week</span>
-        </div>
+        <div class="detail"><strong>Hours</strong><span>Open Late — 7 Days a Week</span></div>
       </div>
-
-      <a href="tel:7803015050" class="btn-primary" style="margin-top:1rem;display:inline-flex;gap:.5rem">
-        Call 780-301-5050
-      </a>
+      <a href="tel:7803015050" class="btn-primary" style="margin-top:1rem;display:inline-flex;gap:.5rem">Call 780-301-5050</a>
     </div>
 
-    <!-- RIGHT -->
     <div class="contact-form reveal">
-
-      <form 
-        action="https://formsubmit.co/yegdial4bottle@gmail.com" 
-        method="POST"
-        onsubmit="showPopup()"
-      >
-
+      <form action="https://formsubmit.co/yegdial4bottle@gmail.com" method="POST" onsubmit="showPopup()">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_next" value="https://dial4bottle.vercel.app/#contact">
-
         <h3>Send a Message</h3>
-
         <div class="form-row">
-
-          <div class="form-group">
-            <label>First Name</label>
-            <input type="text" name="first_name" placeholder="John" required>
-          </div>
-
-          <div class="form-group">
-            <label>Last Name</label>
-            <input type="text" name="last_name" placeholder="Doe" required>
-          </div>
-
+          <div class="form-group"><label>First Name</label><input type="text" name="first_name" placeholder="John" required></div>
+          <div class="form-group"><label>Last Name</label><input type="text" name="last_name" placeholder="Doe" required></div>
         </div>
-
-        <div class="form-group">
-          <label>Phone</label>
-          <input type="tel" name="phone" placeholder="780-XXX-XXXX" required>
-        </div>
-
-        <div class="form-group">
-          <label>Email</label>
-          <input type="email" name="email" placeholder="your@email.com" required>
-        </div>
-
-        <div class="form-group">
-          <label>Message</label>
-          <textarea name="message" placeholder="Tell us what you need..." required></textarea>
-        </div>
-
-        <button type="submit" class="btn-gold-full">
-          Send Message →
-        </button>
-
+        <div class="form-group"><label>Phone</label><input type="tel" name="phone" placeholder="780-XXX-XXXX" required></div>
+        <div class="form-group"><label>Email</label><input type="email" name="email" placeholder="your@email.com" required></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us what you need..." required></textarea></div>
+        <button type="submit" class="btn-gold-full">Send Message →</button>
       </form>
-
     </div>
   </div>
 </section>
@@ -630,6 +659,29 @@ footer p{font-size:.8rem;color:var(--muted)}
 </a>
 
 <script>
+// ===== AGE GATE =====
+function ageVerified(){
+  const gate = document.getElementById('age-gate');
+  gate.style.transition = 'opacity .4s ease';
+  gate.style.opacity = '0';
+  setTimeout(()=>{ gate.style.display='none'; }, 400);
+  // Remember for session
+  sessionStorage.setItem('ageVerified','true');
+}
+
+function ageDenied(){
+  document.getElementById('age-gate').style.display='none';
+  document.getElementById('age-declined').classList.add('show');
+}
+
+// Skip gate if already verified this session
+window.addEventListener('DOMContentLoaded',()=>{
+  if(sessionStorage.getItem('ageVerified')==='true'){
+    document.getElementById('age-gate').style.display='none';
+  }
+});
+
+// ===== NAV =====
 function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open')}
 function closeMenu(){document.getElementById('mobileMenu').classList.remove('open')}
 
@@ -638,62 +690,31 @@ window.addEventListener('scroll',()=>{
   nav.style.boxShadow=window.scrollY>50?'0 2px 30px rgba(0,0,0,0.7)':'none';
 });
 
+// ===== REVEAL =====
 const reveals=document.querySelectorAll('.reveal');
-
 const obs=new IntersectionObserver((entries)=>{
   entries.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.classList.add('visible');
-      obs.unobserve(e.target)
-    }
+    if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}
   });
 },{threshold:0.12});
-
 reveals.forEach(r=>obs.observe(r));
 
+// ===== FORM POPUP =====
 function showPopup(){
-
   const popup=document.createElement('div');
-
   popup.innerHTML=`
-    <div style="
-      position:fixed;
-      top:50%;
-      left:50%;
-      transform:translate(-50%,-50%);
-      background:#141414;
-      border:1px solid #C9922A;
-      padding:24px 35px;
-      border-radius:8px;
-      color:#F5F0E8;
-      z-index:99999;
-      text-align:center;
-      box-shadow:0 0 40px rgba(0,0,0,.6);
-      font-family:Inter,sans-serif;
-    ">
+    <div style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#141414;border:1px solid #C9922A;padding:24px 35px;border-radius:8px;color:#F5F0E8;z-index:99999;text-align:center;box-shadow:0 0 40px rgba(0,0,0,.6);font-family:Inter,sans-serif;">
       <div style="font-size:22px;margin-bottom:10px;color:#E8B84B;">✓</div>
-
-      <div style="font-size:18px;font-weight:600;">
-        Message Submitted Successfully
-      </div>
-    </div>
-  `;
-
+      <div style="font-size:18px;font-weight:600;">Message Submitted Successfully</div>
+    </div>`;
   document.body.appendChild(popup);
-
-  setTimeout(()=>{
-    popup.remove();
-  },3000);
+  setTimeout(()=>{popup.remove();},3000);
 }
 
+// ===== CLOSE MOBILE MENU ON OUTSIDE CLICK =====
 document.addEventListener('click',e=>{
   const menu=document.getElementById('mobileMenu');
-
-  if(
-    menu.classList.contains('open') &&
-    !menu.contains(e.target) &&
-    !e.target.closest('.hamburger')
-  ){
+  if(menu.classList.contains('open')&&!menu.contains(e.target)&&!e.target.closest('.hamburger')){
     closeMenu();
   }
 });
